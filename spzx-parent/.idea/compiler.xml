@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="common-util" />
+        <module name="service-product-client" />
+        <module name="common-service" />
+        <module name="service-order-client" />
+        <module name="service-user-client" />
+        <module name="common-log" />
+        <module name="service-order" />
+        <module name="service-pay" />
+        <module name="spzx-model" />
+        <module name="spzx-server-gateway" />
+        <module name="service-product" />
+        <module name="service-user" />
+        <module name="service-cart" />
+        <module name="spzx-manager" />
+        <module name="service-cart-client" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common-log" options="-parameters" />
+      <module name="common-service" options="-parameters" />
+      <module name="common-util" options="-parameters" />
+      <module name="service-cart" options="-parameters" />
+      <module name="service-cart-client" options="-parameters" />
+      <module name="service-order" options="-parameters" />
+      <module name="service-order-client" options="-parameters" />
+      <module name="service-pay" options="-parameters" />
+      <module name="service-product" options="-parameters" />
+      <module name="service-product-client" options="-parameters" />
+      <module name="service-user" options="-parameters" />
+      <module name="service-user-client" options="-parameters" />
+      <module name="spzx-manager" options="-parameters" />
+      <module name="spzx-model" options="-parameters" />
+      <module name="spzx-server-gateway" options="-parameters" />
+      <module name="spzx-service" options="-parameters" />
+      <module name="spzx-service-client" options="-parameters" />
+    </option>
+  </component>
+</project>

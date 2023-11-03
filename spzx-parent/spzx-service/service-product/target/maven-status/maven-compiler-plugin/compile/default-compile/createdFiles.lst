@@ -1,0 +1,17 @@
+com\atguigu\spzx\product\service\BrandService.class
+com\atguigu\spzx\product\service\impl\ProductServiceImpl.class
+com\atguigu\spzx\product\ProductApplication.class
+com\atguigu\spzx\product\mapper\ProductSkuMapper.class
+com\atguigu\spzx\product\controller\ProductController.class
+com\atguigu\spzx\product\mapper\ProductMapper.class
+com\atguigu\spzx\product\service\ProductService.class
+com\atguigu\spzx\product\service\impl\CategoryServiceImpl.class
+com\atguigu\spzx\product\mapper\CategoryMapper.class
+com\atguigu\spzx\product\service\impl\BrandServiceImpl.class
+com\atguigu\spzx\product\controller\BrandController.class
+com\atguigu\spzx\product\controller\CategoryController.class
+com\atguigu\spzx\product\mapper\BrandMapper.class
+com\atguigu\spzx\product\config\RedisConfig.class
+com\atguigu\spzx\product\controller\IndexController.class
+com\atguigu\spzx\product\mapper\ProductDetailsMapper.class
+com\atguigu\spzx\product\service\CategoryService.class

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.ProductSpecMapper">
+
+    <resultMap id="productSpecMap" type="com.atguigu.spzx.model.entity.product.ProductSpec" autoMapping="true"></resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        id,spec_name,spec_value,create_time,update_time,is_deleted
+    </sql>
+
+    <select id="findAll" resultMap="productSpecMap">
+        select <include refid="columns" />
+        from product_spec
+        where is_deleted = 0
+        order by id desc
+    </select>
+
+    <!--列表-->
+    <select id="findByPage" resultMap="productSpecMap">
+        select <include refid="columns" />
+        from product_spec
+        where is_deleted = 0
+        order by id desc
+    </select>
+
+    <!--添加-->
+    <insert id="save">
+        insert into product_spec (
+            id,
+            spec_name,
+            spec_value,
+            create_time,
+            update_time,
+            is_deleted
+        ) values (
+                     #{id},
+                     #{specName},
+                     #{specValue},
+                     now(),
+                     now(),
+                     0
+                 )
+    </insert>
+
+    <!--修改-->
+    <update id="update">
+        update product_spec set
+        <if test="specName != null and specName != ''">
+            spec_name = #{specName},
+        </if>
+        <if test="specValue != null and specValue != ''">
+            spec_value = #{specValue},
+        </if>
+        update_time =  now()
+        where
+        id = #{id}
+    </update>
+
+    <!--删除-->
+    <update id="delete">
+        update product_spec set
+                                update_time = now() ,
+                                is_deleted = 1
+        where
+            id = #{id}
+    </update>
+</mapper>

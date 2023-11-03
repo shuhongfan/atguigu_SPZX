@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.SysRoleMenuMapper">
+
+    <!--//把父菜单isHalf半开状态 1-->
+    <update id="updateSysRoleMenuIsHalf">
+        update sys_role_menu srm set srm.is_half = 1 where menu_id = #{menuId}
+    </update>
+    <!--// 询角色分配过菜单id列表-->
+    <select id="findSysRoleMenuByRoleId" resultType="long">
+        select menu_id from sys_role_menu
+        where role_id=#{roleId} and is_deleted=0 and is_half=0
+    </select>
+
+<!--    //删除角色分配菜单数据-->
+    <delete id="deleteByRoleId">
+        delete from sys_role_menu where role_id=#{roleId}
+    </delete>
+
+    <!--//保存分配数据-->
+    <insert id="doAssign">
+        insert into sys_role_menu(
+            role_id,
+            menu_id,
+            create_time , update_time , is_deleted , is_half
+        ) values
+        <foreach collection="menuIdList" item="menuInfo" separator=",">
+            (#{roleId},#{menuInfo.id},now(),now(),0,#{menuInfo.isHalf})
+        </foreach>
+    </insert>
+</mapper>

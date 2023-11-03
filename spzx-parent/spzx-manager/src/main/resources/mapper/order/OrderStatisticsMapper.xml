@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.OrderStatisticsMapper">
+
+    <resultMap id="orderStatisticsMap" type="com.atguigu.spzx.model.entity.order.OrderStatistics" autoMapping="true"></resultMap>
+
+    <select id="selectList" resultMap="orderStatisticsMap">
+        select *
+        from order_statistics
+        <where>
+            <if test="createTimeBegin != null and createTimeBegin != ''">
+                and order_date >= #{createTimeBegin}
+            </if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">
+                and order_date &lt;= #{createTimeEnd}
+            </if>
+        </where>
+        order by order_date
+    </select>
+
+    <!--//3 把统计之后的数据，添加统计结果表里面-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into order_statistics (
+            id,
+            order_date,
+            total_amount,
+            total_num
+        ) values (
+                     #{id},
+                     #{orderDate},
+                     #{totalAmount},
+                     #{totalNum}
+                 )
+    </insert>
+</mapper>

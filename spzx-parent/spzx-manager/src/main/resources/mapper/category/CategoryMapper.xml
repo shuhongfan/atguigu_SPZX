@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.CategoryMapper">
+
+    <resultMap id="categoryMap" type="com.atguigu.spzx.model.entity.product.Category" autoMapping="true">
+    </resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        id,name,image_url,parent_id,status,order_num,create_time,update_time,is_deleted
+    </sql>
+
+<!--    批量保存分类-->
+    <insert id="batchInsert">
+        insert into category(
+            id,
+            name,
+            image_url,
+            parent_id,
+            status,
+            order_num,
+            create_time ,
+            update_time ,
+            is_deleted
+        ) values
+        <foreach collection="categoryList" item="item" separator=",">
+            (
+                #{item.id},
+                #{item.name},
+                #{item.imageUrl},
+                #{item.parentId},
+                #{item.status},
+                #{item.orderNum},
+                now(),
+                now(),
+                0
+            )
+        </foreach>
+    </insert>
+
+    <!--//2 调用mapper方法查询所有分类，返回list集合-->
+    <select id="findAll" resultMap="categoryMap">
+        select <include refid="columns"/>
+        from category
+        where is_deleted=0
+        order by id
+    </select>
+    <!--查询下层分类-->
+    <select id="selectCategoryByParentId" resultMap="categoryMap">
+        select <include refid="columns"/>
+        from category
+        where parent_id=#{id} and is_deleted=0
+        order by id desc
+    </select>
+
+    <!--// 判断每个分类是否有下一层分类-->
+    <select id="selectCountByParentId" resultType="Integer">
+        SELECT count(*)
+        FROM category
+        WHERE parent_id=#{id} and is_deleted=0
+    </select>
+</mapper>

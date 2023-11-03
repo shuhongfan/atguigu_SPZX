@@ -1,0 +1,10 @@
+com\atguigu\spzx\pay\config\AlipayConfiguration.class
+com\atguigu\spzx\pay\controller\AlipayController.class
+com\atguigu\spzx\pay\utils\AlipayProperties.class
+com\atguigu\spzx\pay\service\PaymentInfoService.class
+com\atguigu\spzx\pay\service\impl\AlipayServiceImpl.class
+com\atguigu\spzx\pay\PayApplication.class
+com\atguigu\spzx\pay\service\AlipayService.class
+META-INF\spring-configuration-metadata.json
+com\atguigu\spzx\pay\service\impl\PaymentInfoServiceImpl.class
+com\atguigu\spzx\pay\mapper\PaymentInfoMapper.class

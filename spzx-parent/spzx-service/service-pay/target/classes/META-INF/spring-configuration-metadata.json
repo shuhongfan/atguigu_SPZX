@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "spzx.alipay",
+      "type": "com.atguigu.spzx.pay.utils.AlipayProperties",
+      "sourceType": "com.atguigu.spzx.pay.utils.AlipayProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spzx.alipay.alipay-public-key",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.spzx.pay.utils.AlipayProperties"
+    },
+    {
+      "name": "spzx.alipay.alipay-url",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.spzx.pay.utils.AlipayProperties"
+    },
+    {
+      "name": "spzx.alipay.app-id",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.spzx.pay.utils.AlipayProperties"
+    },
+    {
+      "name": "spzx.alipay.app-private-key",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.spzx.pay.utils.AlipayProperties"
+    },
+    {
+      "name": "spzx.alipay.notify-payment-url",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.spzx.pay.utils.AlipayProperties"
+    },
+    {
+      "name": "spzx.alipay.return-payment-url",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.spzx.pay.utils.AlipayProperties"
+    }
+  ],
+  "hints": []
+}

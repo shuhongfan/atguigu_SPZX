@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.spzx.pay.mapper.PaymentInfoMapper">
+
+    <resultMap id="paymentInfoMap" type="com.atguigu.spzx.model.entity.pay.PaymentInfo" autoMapping="true">
+    </resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        id,user_id,order_no,pay_type,out_trade_no,amount,content,payment_status,callback_time,callback_content,create_time,update_time,is_deleted
+    </sql>
+
+    <update id="updatePaymentInfo">
+        update payment_info set
+        <if test="userId != null and userId != ''">
+            user_id = #{userId},
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            order_no = #{orderNo},
+        </if>
+        <if test="payType != null">
+            pay_type = #{payType},
+        </if>
+        <if test="outTradeNo != null and outTradeNo != ''">
+            out_trade_no = #{outTradeNo},
+        </if>
+        <if test="amount != null and amount != ''">
+            amount = #{amount},
+        </if>
+        <if test="content != null and content != ''">
+            content = #{content},
+        </if>
+        <if test="paymentStatus != null">
+            payment_status = #{paymentStatus},
+        </if>
+        <if test="callbackTime != null">
+            callback_time = #{callbackTime},
+        </if>
+        <if test="callbackContent != null and callbackContent != ''">
+            callback_content = #{callbackContent},
+        </if>
+        update_time =  now()
+        where
+        id = #{id}
+    </update>
+
+    <!--//1 根据订单编号查询支付记录-->
+    <select id="getByOrderNo" resultMap="paymentInfoMap">
+        select <include refid="columns"/>
+        from payment_info
+        where order_no=#{orderNo}
+    </select>
+
+    <!--//添加-->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into payment_info (
+            id,
+            user_id,
+            order_no,
+            pay_type,
+            out_trade_no,
+            amount,
+            content,
+            payment_status,
+            callback_time,
+            callback_content
+        ) values (
+                     #{id},
+                     #{userId},
+                     #{orderNo},
+                     #{payType},
+                     #{outTradeNo},
+                     #{amount},
+                     #{content},
+                     #{paymentStatus},
+                     #{callbackTime},
+                     #{callbackContent}
+                 )
+    </insert>
+</mapper>

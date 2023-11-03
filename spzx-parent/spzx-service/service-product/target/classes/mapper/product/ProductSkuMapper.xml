@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.spzx.product.mapper.ProductSkuMapper">
+
+    <resultMap id="productSkuMap" type="com.atguigu.spzx.model.entity.product.ProductSku" autoMapping="true">
+    </resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        id,sku_code,sku_name,product_id,thumb_img,sale_price,market_price,cost_price,stock_num,sale_num,sku_spec,weight,volume,status,create_time,update_time,is_deleted
+    </sql>
+
+   <!-- //根据商品id获取商品所有sku列表-->
+    <select id="findByProductId" resultMap="productSkuMap">
+        select <include refid="columns" />
+        from product_sku
+        where
+        product_id = #{productId}
+    </select>
+
+    <!--//2 根据skuId获取sku信息-->
+    <select id="getById" resultMap="productSkuMap">
+        select <include refid="columns" />
+        from product_sku
+        where
+        id = #{id}
+    </select>
+
+    <!--//分页查询-->
+    <select id="findByPage" resultMap="productSkuMap">
+        select
+        sku.id,sku.sku_code,sku.sku_name,sku.product_id,sku.thumb_img,sku.sale_price,sku.market_price,sku.cost_price,sku.stock_num,sku.sale_num,sku.sku_spec,sku.weight,sku.volume,sku.status,sku.create_time,sku.update_time,sku.is_deleted
+        from product_sku sku
+        left join product p on p.id = sku.product_id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and sku.sku_name like CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="brandId != null">
+                and p.brand_id = #{brandId}
+            </if>
+            <if test="category1Id != null">
+                and p.category1_id = #{category1Id}
+            </if>
+            <if test="category2Id != null">
+                and p.category2_id = #{category2Id}
+            </if>
+            <if test="category3Id != null">
+                and p.category3_id = #{category3Id}
+            </if>
+            and p.status = 1
+            and p.audit_status = 1
+            and sku.is_deleted = 0
+            and p.is_deleted = 0
+        </where>
+        <if test="order == 1">
+            order by sku.sale_num desc
+        </if>
+        <if test="order == 2">
+            order by sku.sale_price asc
+        </if>
+        <if test="order == 3">
+            order by sku.sale_price desc
+        </if>
+    </select>
+
+    <!--//2 根据销量排序，获取前10条记录-->
+    <select id="selectProductSkuBySale" resultMap="productSkuMap">
+        SELECT sku.*
+        FROM product_sku sku
+                 INNER JOIN product p ON p.id=sku.product_id
+        WHERE p.status=1
+          AND p.is_deleted=0
+          AND sku.is_deleted=0
+        ORDER BY sku.sale_num DESC
+        LIMIT 10
+    </select>
+</mapper>

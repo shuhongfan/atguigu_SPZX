@@ -1,0 +1,14 @@
+/**如果需要修改其它变量，可以在以下文件中查找
+ * https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/src/common/var.scss
+ */
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': $mainColor,
+    ),
+  ),
+);
+
+@use "element-plus/theme-chalk/src/reset.scss" as *;
+@use "element-plus/theme-chalk/src/index.scss" as *;

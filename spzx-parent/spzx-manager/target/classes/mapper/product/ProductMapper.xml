@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.ProductMapper">
+
+    <resultMap id="productMap" type="com.atguigu.spzx.model.entity.product.Product" autoMapping="true"></resultMap>
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        id,name,brand_id,category1_id,category2_id,category3_id,unit_name,slider_urls,spec_value,status,audit_status,audit_message,create_time,update_time,is_deleted
+    </sql>
+
+    <update id="deleteById">
+        update product set
+                           update_time = now() ,
+                           is_deleted = 1
+        where
+            id = #{id}
+    </update>
+
+    <update id="updateById" >
+        update product set
+        <if test="name != null and name != ''">
+            name = #{name},
+        </if>
+        <if test="brandId != null and brandId != ''">
+            brand_id = #{brandId},
+        </if>
+        <if test="category1Id != null and category1Id != ''">
+            category1_id = #{category1Id},
+        </if>
+        <if test="category2Id != null and category2Id != ''">
+            category2_id = #{category2Id},
+        </if>
+        <if test="category3Id != null and category3Id != ''">
+            category3_id = #{category3Id},
+        </if>
+        <if test="unitName != null and unitName != ''">
+            unit_name = #{unitName},
+        </if>
+        <if test="sliderUrls != null and sliderUrls != ''">
+            slider_urls = #{sliderUrls},
+        </if>
+        <if test="specValue != null and specValue != ''">
+            spec_value = #{specValue},
+        </if>
+        <if test="status != null and status != ''">
+            status = #{status},
+        </if>
+        <if test="auditStatus != null and auditStatus != ''">
+            audit_status = #{auditStatus},
+        </if>
+        <if test="auditMessage != null and auditMessage != ''">
+            audit_message = #{auditMessage},
+        </if>
+        update_time =  now()
+        where
+        id = #{id}
+    </update>
+
+    <!--/1 根据id查询商品基本信息-->
+    <select id="findProductById" resultMap="productMap">
+        SELECT
+            p.id, p.name , p.brand_id , p.category1_id , p.category2_id , p.category3_id, p.unit_name,
+            p.slider_urls , p.spec_value , p.status , p.audit_status , p.audit_message , p.create_time , p.update_time , p.is_deleted ,
+            b.name brandName , c1.name category1Name , c2.name category2Name , c3.name category3Name
+        FROM product p
+                 INNER JOIN brand b ON b.id=p.brand_id
+                 INNER JOIN category c1 ON c1.id=p.category1_id
+                 INNER JOIN category c2 ON c2.id=p.category2_id
+                 INNER JOIN category c3 ON c3.id=p.category3_id
+        where p.id=#{id}
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into product (
+            id,
+            name,
+            brand_id,
+            category1_id,
+            category2_id,
+            category3_id,
+            unit_name,
+            slider_urls,
+            spec_value,
+            status,
+            audit_status,
+            audit_message,
+            create_time,
+            update_time,
+            is_deleted
+        ) values (
+                     #{id},
+                     #{name},
+                     #{brandId},
+                     #{category1Id},
+                     #{category2Id},
+                     #{category3Id},
+                     #{unitName},
+                     #{sliderUrls},
+                     #{specValue},
+                     #{status},
+                     #{auditStatus},
+                     #{auditMessage},
+                     now(),
+                     now() ,
+                     0
+                 )
+    </insert>
+
+    <!--//列表（条件分页查询）-->
+    <select id="findByPage" resultMap="productMap">
+        SELECT
+            p.id, p.name , p.brand_id , p.category1_id , p.category2_id , p.category3_id, p.unit_name,
+            p.slider_urls , p.spec_value , p.status , p.audit_status , p.audit_message , p.create_time , p.update_time , p.is_deleted ,
+            b.name brandName , c1.name category1Name , c2.name category2Name , c3.name category3Name
+        FROM product p
+                 INNER JOIN brand b ON b.id=p.brand_id
+                 INNER JOIN category c1 ON c1.id=p.category1_id
+                 INNER JOIN category c2 ON c2.id=p.category2_id
+                 INNER JOIN category c3 ON c3.id=p.category3_id
+        <where>
+            <if test="brandId != null and brandId != ''">
+                and p.brand_id = #{brandId}
+            </if>
+            <if test="category1Id != null and category1Id != ''">
+                and p.category1_id = #{category1Id}
+            </if>
+            <if test="category2Id != null and category2Id != ''">
+                and p.category2_id = #{category2Id}
+            </if>
+            <if test="category3Id != null and category3Id != ''">
+                and p.category3_id = #{category3Id}
+            </if>
+            and p.is_deleted = 0
+        </where>
+        order by id desc
+    </select>
+</mapper>

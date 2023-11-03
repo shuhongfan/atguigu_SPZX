@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.spzx.user.mapper.UserAddressMapper">
+
+    <!--//根据id获取收货地址信息-->
+    <select id="getUserAddress" resultType="com.atguigu.spzx.model.entity.user.UserAddress">
+        select *
+        from user_address
+        where id = #{id}
+    </select>
+
+    <!--//获取用户地址列表-->
+    <select id="findUserAddressList" resultType="com.atguigu.spzx.model.entity.user.UserAddress">
+        select *
+        from user_address
+        where user_id = #{userId}
+    </select>
+</mapper>

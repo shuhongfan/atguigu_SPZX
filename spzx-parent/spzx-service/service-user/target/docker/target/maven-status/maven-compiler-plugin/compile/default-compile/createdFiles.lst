@@ -1,0 +1,12 @@
+com\atguigu\spzx\user\service\impl\UserAddressServiceImpl.class
+com\atguigu\spzx\user\service\SmsService.class
+com\atguigu\spzx\user\service\UserAddressService.class
+com\atguigu\spzx\user\service\impl\SmsServiceImpl.class
+com\atguigu\spzx\user\service\UserInfoService.class
+com\atguigu\spzx\user\mapper\UserAddressMapper.class
+com\atguigu\spzx\user\service\impl\UserInfoServiceImpl.class
+com\atguigu\spzx\user\controller\SmsController.class
+com\atguigu\spzx\user\controller\UserAddressController.class
+com\atguigu\spzx\user\controller\UserInfoController.class
+com\atguigu\spzx\user\UserApplication.class
+com\atguigu\spzx\user\mapper\UserInfoMapper.class

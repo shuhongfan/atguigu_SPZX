@@ -1,0 +1,72 @@
+{
+  "name": "vue3-element-admin",
+  "version": "3.0.0",
+  "author": {
+    "name": "huzhushan",
+    "email": "huzhushan@126.com",
+    "url": "https://github.com/huzhushan"
+  },
+  "scripts": {
+    "start": "npm run dev:mock",
+    "dev": "vite",
+    "dev:mock": "vite --mode mock",
+    "build": "vite build",
+    "build:mock": "vite build --mode mock",
+    "serve": "vite preview",
+    "lint": "eslint --fix --ext .js,.vue src"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "dependencies": {
+    "axios": "^0.21.1",
+    "echarts": "^5.4.3",
+    "pinia": "^2.0.14",
+    "vue": "3.2.33",
+    "vue-router": "^4.0.5",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@ehutch79/vite-eslint": "0.0.1",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "^3.1.2",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "autoprefixer": "^10.2.5",
+    "babel-eslint": "^10.1.0",
+    "crypto-js": "^4.0.0",
+    "element-plus": "^2.2.13",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-vue": "^7.0.0-0",
+    "husky": "^1.3.1",
+    "lint-staged": "^9.5.0",
+    "mockjs": "^1.1.0",
+    "prettier": "^1.19.1",
+    "sass": "^1.41.1",
+    "vite": "^2.3.7",
+    "vite-plugin-mock": "^2.3.0",
+    "vite-plugin-svg-icons": "^0.4.0",
+    "vue-i18n": "^9.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huzhushan/vue3-element-admin.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/huzhushan/vue3-element-admin/issues"
+  },
+  "homepage": "https://github.com/huzhushan/vue3-element-admin"
+}

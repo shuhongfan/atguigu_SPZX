@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.order.mapper.OrderItemMapper">
+
+    <!--//根据订单id查询订单项-->
+    <select id="findByOrderId" resultType="com.atguigu.spzx.model.entity.order.OrderItem">
+        select *
+        from order_item
+        where order_id=#{orderId}
+        and is_deleted=0
+        order by id desc
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into order_item (
+            id,
+            order_id,
+            sku_id,
+            sku_name,
+            thumb_img,
+            sku_price,
+            sku_num
+        ) values (
+                     #{id},
+                     #{orderId},
+                     #{skuId},
+                     #{skuName},
+                     #{thumbImg},
+                     #{skuPrice},
+                     #{skuNum}
+                 )
+    </insert>
+</mapper>

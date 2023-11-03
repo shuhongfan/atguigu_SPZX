@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.ProductSkuMapper">
+
+    <sql id="columns">
+        id,sku_code,sku_name,product_id,thumb_img,sale_price,market_price,cost_price,stock_num,sku_spec,weight,volume,status,create_time,update_time,is_deleted
+    </sql>
+
+    <update id="deleteByProductId">
+        update product_sku set
+                               update_time = now() ,
+                               is_deleted = 1
+        where
+            product_id = #{productId}
+    </update>
+
+    <update id="updateById" >
+        update product_sku set
+        <if test="skuCode != null and skuCode != ''">
+            sku_code = #{skuCode},
+        </if>
+        <if test="skuName != null and skuName != ''">
+            sku_name = #{skuName},
+        </if>
+        <if test="productId != null and productId != ''">
+            product_id = #{productId},
+        </if>
+        <if test="thumbImg != null and thumbImg != ''">
+            thumb_img = #{thumbImg},
+        </if>
+        <if test="salePrice != null and salePrice != ''">
+            sale_price = #{salePrice},
+        </if>
+        <if test="marketPrice != null and marketPrice != ''">
+            market_price = #{marketPrice},
+        </if>
+        <if test="costPrice != null and costPrice != ''">
+            cost_price = #{costPrice},
+        </if>
+        <if test="stockNum != null and stockNum != ''">
+            stock_num = #{stockNum},
+        </if>
+        <if test="skuSpec != null and skuSpec != ''">
+            sku_spec = #{skuSpec},
+        </if>
+        <if test="weight != null and weight != ''">
+            weight = #{weight},
+        </if>
+        <if test="volume != null and volume != ''">
+            volume = #{volume},
+        </if>
+        <if test="status != null and status != ''">
+            status = #{status},
+        </if>
+        update_time =  now()
+        where
+        id = #{id}
+    </update>
+
+    <!--//2 根据id查询商品sku信息列表-->
+    <select id="findProductSkuByProductId" resultType="com.atguigu.spzx.model.entity.product.ProductSku">
+        select <include refid="columns" />
+        from product_sku
+        where product_id = #{productId}
+        and is_deleted = 0
+        order by id desc
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into product_sku (
+            id,
+            sku_code,
+            sku_name,
+            product_id,
+            thumb_img,
+            sale_price,
+            market_price,
+            cost_price,
+            stock_num,
+            sku_spec,
+            weight,
+            volume,
+            status,
+            sale_num,
+            create_time,
+            update_time,
+            is_deleted
+        ) values (
+                     #{id},
+                     #{skuCode},
+                     #{skuName},
+                     #{productId},
+                     #{thumbImg},
+                     #{salePrice},
+                     #{marketPrice},
+                     #{costPrice},
+                     #{stockNum},
+                     #{skuSpec},
+                     #{weight},
+                     #{volume},
+                     #{status},
+                     #{saleNum},
+                     now(),
+                     now(),
+                     0
+                 )
+    </insert>
+</mapper>
